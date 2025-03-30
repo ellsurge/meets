@@ -1,19 +1,13 @@
 import { View } from 'tamagui';
 import EventCard from '../molecules/EventCard';
 import React from 'react';
+import { RouterOutput } from '@/utils/trpc';
 
 // Reuse the prop type from EventCard
 type EventCardProps = React.ComponentProps<typeof EventCard>;
 
 interface EventListProps {
-    events: 
-        {
-    id: string;
-    title: string;
-        date: string;
-    location: string;
-
-    }[]; // Use the EventCardProps type for consistency
+    events: EventCardProps[]; // Use the EventCardProps type for consistency
     onDelete: (id: string) => void; // Function to handle delete action
 }
 

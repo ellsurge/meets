@@ -8,7 +8,7 @@ type EventListProps = React.ComponentProps<typeof EventList>;
 
 type props ={
     eventList: EventListProps;
-    onAdd: React.ComponentProps<typeof AddEvent>; // Function to handle add action
+    addEvent: React.ComponentProps<typeof AddEvent>; // Function to handle add action
 }
 export default function TestTemplate( props: props) {
     return (
@@ -24,7 +24,7 @@ export default function TestTemplate( props: props) {
             </Text> 
             <XStack width={"100%"} gap={10} justify="center">
                 
-            <AddEvent {...props.onAdd} />
+            <AddEvent {...props.addEvent} />
             <EventList {...props.eventList} />
          </XStack>
 

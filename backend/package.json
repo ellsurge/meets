@@ -15,6 +15,7 @@
     "@fastify/websocket": "^11.0.2",
     "@prisma/client": "^6.5.0",
     "@trpc/client": "^11.0.1",
+    "@trpc/react-query": "^11.0.1",
     "@trpc/server": "^11.0.1",
     "dotenv": "^16.4.7",
     "fastify": "^5.2.2",

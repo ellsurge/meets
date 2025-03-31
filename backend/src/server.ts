@@ -5,8 +5,24 @@ import { type AppRouter, appRouter } from "./trpc";
 
 import ws, { fastifyWebsocket } from "@fastify/websocket";
 
+const environment = (process.env.NODE_ENV || 'development') as keyof typeof envToLogger;
+
+const envToLogger = {
+  development: {
+    transport: {
+      target: 'pino-pretty',
+      options: {
+        translateTime: 'HH:MM:ss Z',
+        ignore: 'pid,hostname',
+      },
+    },
+  },
+  production: true,
+  test: false,
+}
 const server = fastify({
     maxParamLength: 5000,
+    logger:envToLogger[environment] ?? true
 });
 server.register(cors, {
     origin: "*"
@@ -28,22 +44,10 @@ server.register(fastifyTRPCPlugin, {
         onError({
             path, error
         }) {
-            console.error(`Error in ${path}: ${error}`);
+            server.log.error(`Error in ${path}: ${error}`);
         },
     } satisfies FastifyTRPCPluginOptions<AppRouter>['trpcOptions'],
 });
-
-
-
-// server.register(fastifyCors, {
-//     origin: (origin, cb) => {
-//         if (origin) {
-//             cb(null, true);
-//         } else {
-//             cb(new Error("Not allowed"), false);
-//         }
-//     }
-// });
 
 server.register(ws, {   
     options: { clientTracking: true },
@@ -52,7 +56,7 @@ server.register(ws, {
 (async () => {
     try {
         await server.listen({ port: 4000 });
-        console.log(`🚀 Server running on http://localhost:4000"`);
+        server.log.info(`🚀 Server running on http://localhost:4000"`);
     } catch (err) {
         server.log.error(err);
         process.exit(1);

@@ -1,6 +1,4 @@
 import TestTemplate from "@/components/templates/TestTemplate";
-import { trpc } from "@/utils/trpc";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Text, YStack } from "tamagui";
 import React from "react";
 import { useTestScreen } from "@/hooks/useTestScreen";

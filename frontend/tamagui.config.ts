@@ -1,9 +1,10 @@
 import { createTamagui, getConfig } from '@tamagui/core'
 import { defaultConfig } from '@tamagui/config/v4';
-
+import { themes } from './theme';
 
 export const config = createTamagui({
   ...defaultConfig,
+  themes,
   media: {
     xs: { maxWidth: 660 },
     gtXs: { minWidth: 660 + 1 },

@@ -16,7 +16,7 @@ export default function TestTemplate(props: props) {
         <YStack
             p={16}
             flex={1}
-            verticalAlign="center"
+            // verticalAlign="center"
             bg="#f5f5f5"
             gap={10}
         >
@@ -24,7 +24,7 @@ export default function TestTemplate(props: props) {
                 Test Screen
             </Text>
             <YStack
-                $md={{ flexDirection: "row" }}
+                $gtSm={{ flexDirection: "row" }}
                 width={"100%"}
                 gap={10}
                 justify="center"

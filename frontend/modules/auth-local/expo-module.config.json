@@ -1,0 +1,17 @@
+{
+  "platforms": [
+    "apple",
+    "android",
+    "web"
+  ],
+  "apple": {
+    "modules": [
+      "AuthLocalModule"
+    ]
+  },
+  "android": {
+    "modules": [
+      "expo.modules.authlocal.AuthLocalModule"
+    ]
+  }
+}

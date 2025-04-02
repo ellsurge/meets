@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.frontend"
     },
     "web": {
       "bundler": "metro",
@@ -23,6 +24,10 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      "@react-native-google-signin/google-signin",
+              {
+          "iosUrlScheme": "com.googleusercontent.apps._some_id_here_"
+        },
       "expo-router",
       [
         "expo-splash-screen",

@@ -4,7 +4,7 @@ import { AuthService } from "../modules/auth.service";
 
 
 
-export const auth_reg_schema = z.object({email: z.string().email(),password: z.string().min(6),userid: z.string().min(3)})
+export const auth_reg_schema = z.object({email: z.string().email(),password: z.string().min(6)})
 export const auth_login_schema = z.object({ email: z.string().email(), password: z.string() });
 export const auth_verify_schema = z.object({ email: z.string().email(), code: z.string() });
 export const auth_refresh_token_schema = z.object({ refreshToken: z.string() });   

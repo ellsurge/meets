@@ -45,6 +45,16 @@ export class AuthService {
     return { success: true, message: "Email verified successfully" };
   }
 
+  static async refreshToken(input: AuthRefreshTokenInput) {
+    try {
+      const decoded = jwt.verify(input.refreshToken, process.env.REFRESH_SECRET!) as { userId: string };
+      const { accessToken } = this.generateTokens(decoded.userId);
+      return { accessToken };
+    } catch {
+      throw new Error("Invalid refresh token");
+    }
+  }
+
   static async login(input: AuthLoginInput) {
     const user = await this.findUserByEmail(input.email);
 
@@ -63,17 +73,7 @@ export class AuthService {
       data: { refreshToken },
     });
 
-    return { accessToken, refreshToken };
-  }
-
-  static async refreshToken(input: AuthRefreshTokenInput) {
-    try {
-      const decoded = jwt.verify(input.refreshToken, process.env.REFRESH_SECRET!) as { userId: string };
-      const { accessToken } = this.generateTokens(decoded.userId);
-      return { accessToken };
-    } catch {
-      throw new Error("Invalid refresh token");
-    }
+    return {user,  token: { accessToken, refreshToken } };
   }
 
   static async native(input: AuthNativeInput) {
@@ -89,8 +89,8 @@ export class AuthService {
       throw new Error("Unsupported provider");
     }
 
-    const { accessToken } = this.generateTokens(user.id);
-    return { token: accessToken, user };
+    const { accessToken, refreshToken } = this.generateTokens(user.id);
+    return {user,  token: { accessToken, refreshToken } };
   }
 
   private static async hashPassword(password: string) {
